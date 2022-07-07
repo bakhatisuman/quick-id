@@ -1,7 +1,8 @@
-package com.example.mycameraapp
+package com.example.mycameraapp.main
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import com.example.mycameraapp.R
 import com.example.mycameraapp.databinding.ActivityMainBinding
 import com.example.mycameraapp.login.LoginActivity
 import com.example.mycameraapp.session.SessionManager
@@ -26,8 +28,12 @@ class MainActivity : AppCompatActivity() {
     private var isFullScreen = true
     private var isMeasureClick = false
 
-    val measuresItems by lazy {
-        measuresBalloons()
+    val measuresItemsPortrait by lazy {
+        measuresBalloonsForProtrait()
+    }
+
+    val measuresItemsLandscape by lazy {
+        measuresBalloonsForLanScape()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,7 +134,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayShowHomeEnabled(false)
         supportActionBar?.hide()
         binding.fab.visibility = View.GONE
-        binding.fullScreenImage.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_fullscreen_exit_24))
+        binding.fullScreenImage.setImageDrawable(ContextCompat.getDrawable(this,
+            R.drawable.ic_baseline_fullscreen_exit_24
+        ))
 //        binding.fullScreenImage.
 
 
@@ -144,7 +152,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.show()
         binding.fab.visibility = View.VISIBLE
 
-        binding.fullScreenImage.setImageDrawable(ContextCompat.getDrawable(this,R.drawable.ic_baseline_fullscreen_24))
+        binding.fullScreenImage.setImageDrawable(ContextCompat.getDrawable(this,
+            R.drawable.ic_baseline_fullscreen_24
+        ))
 
 
         /*val rparams: RelativeLayout.LayoutParams = binding.bottomRl
@@ -163,24 +173,49 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun showArrowDialogForMeasure() {
-        binding.measure.showAlignTop(measuresItems, 0, 0)
+    private fun showArrowDialogForMeasureForPortrait() {
+        binding.measure.showAlignTop(measuresItemsPortrait, 0, 0)
+    }
+
+    private fun showArrowDialogForMeasureForLandScape() {
+        binding.measure.showAlignRight(measuresItemsLandscape)
     }
 
     private fun clickMeasureIcon() {
         binding.measure.setOnClickListener {
 
-            showArrowDialogForMeasure()
+            if (resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT){
+                showArrowDialogForMeasureForPortrait()
+            }else{
+                showArrowDialogForMeasureForLandScape()
+            }
+
+
         }
     }
 
 
-    private fun measuresBalloons(): Balloon {
-        return BalloonUtils.getAllBalloon(
+    private fun measuresBalloonsForProtrait(): Balloon {
+        return BalloonUtils.getAllBalloonForPortrait(
             applicationContext,
             this,
-            "Clear All",
-            R.drawable.ic_baseline_close_24,
+            "",
+//            R.drawable.ic_baseline_close_24,
+            object : OnBalloonClickListener {
+                override fun onBalloonClick(view: View) {
+
+                }
+            }
+        )
+    }
+
+
+    private fun measuresBalloonsForLanScape(): Balloon {
+        return BalloonUtils.getAllBalloonForLandscape(
+            applicationContext,
+            this,
+            "",
+//            R.drawable.ic_baseline_close_24,
             object : OnBalloonClickListener {
                 override fun onBalloonClick(view: View) {
 
@@ -190,3 +225,8 @@ class MainActivity : AppCompatActivity() {
     }
 
 }
+
+//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
+
+
+//curl -H 'Authorization: token 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'

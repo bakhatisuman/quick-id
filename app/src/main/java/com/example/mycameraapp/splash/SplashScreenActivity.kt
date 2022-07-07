@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import com.example.mycameraapp.MainActivity
+import com.example.mycameraapp.main.MainActivity
 import com.example.mycameraapp.databinding.ActivitySplashScreenBinding
 import com.example.mycameraapp.login.LoginActivity
 import com.example.mycameraapp.session.SessionManager
@@ -44,7 +44,7 @@ class SplashScreenActivity : AppCompatActivity() {
         Handler(Looper.getMainLooper()).postDelayed(
             {checkSessionAndDeclareWhereToGo()
             },
-            100 // value in milliseconds
+            1000 // value in milliseconds
         )
     }
 

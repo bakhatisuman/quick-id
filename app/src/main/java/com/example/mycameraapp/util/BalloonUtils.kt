@@ -10,11 +10,11 @@ object BalloonUtils {
 ////        fun onClick()
 //    }
 
-    fun getAllBalloon(
+    fun getAllBalloonForPortrait(
         context: Context,
         lifecycleOwner: LifecycleOwner,
         message: String,
-        icon: Int,
+//        icon: Int,
         listener: OnBalloonClickListener
     ): Balloon {
 
@@ -36,7 +36,54 @@ object BalloonUtils {
             .setTextSize(16f)
             .setCornerRadius(8f)
             .setTextColorResource(com.example.mycameraapp.R.color.white)
-            .setIconDrawableResource(icon)
+//            .setIconDrawableResource(icon)
+//            .setIconForm(form)
+            .setIconWidth(60)
+            .setIconHeight(90)
+            .setBackgroundColorResource(com.example.mycameraapp.R.color.gray_400)
+            .setAlpha(0.95f)
+            .setOnBalloonDismissListener {
+//                Toast.makeText(context.applicationContext, "dismissed", Toast.LENGTH_SHORT).show()
+            }
+            .setOnBalloonClickListener {
+                listener.onBalloonClick(it)
+            }
+
+            .setBalloonAnimation(BalloonAnimation.ELASTIC)
+            .setLifecycleOwner(lifecycleOwner)
+            .build()
+    }
+
+
+    fun getAllBalloonForLandscape(
+        context: Context,
+        lifecycleOwner: LifecycleOwner,
+        message: String,
+//        icon: Int,
+        listener: OnBalloonClickListener
+    ): Balloon {
+
+        return Balloon.Builder(context)
+            .setTextIsHtml(true)
+            .setText(message)
+            .setArrowSize(16)
+            .setArrowOrientation(ArrowOrientation.LEFT)
+//            .setArrowTopPadding(8)
+//            .setWidthRatio(0.5f)
+            .setWidthRatio(0.35f)
+            .setHeight(90)
+//            .setHeight(BalloonSizeSpec.WRAP)
+            .setWidth(350)
+            .setArrowPositionRules(ArrowPositionRules.ALIGN_ANCHOR)
+            .setArrowPosition(0.5f)
+            .setTextGravity(0)
+            .setMarginRight(6)
+            .setMarginLeft(6)
+            .setPadding(8)
+            .setTextSize(16f)
+            .setCornerRadius(8f)
+            .setTextColorResource(com.example.mycameraapp.R.color.white)
+//            .setIconDrawableResource(icon)
 //            .setIconForm(form)
             .setIconWidth(60)
             .setIconHeight(90)

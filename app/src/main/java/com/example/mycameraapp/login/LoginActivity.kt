@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
-import com.example.mycameraapp.MainActivity
+import com.example.mycameraapp.main.MainActivity
 import com.example.mycameraapp.R
 import com.example.mycameraapp.databinding.ActivityLoginBinding
 import com.example.mycameraapp.session.Session
